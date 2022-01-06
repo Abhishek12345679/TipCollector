@@ -3,7 +3,10 @@ package com.abhisheksah.tipcollector
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -25,20 +28,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             TipCollectorTheme {
                 MyApp{
-                        Header()
-                        Column() {
-                            AmountDisplay()
-                        }
-                    
+                    Header()
+                    Column() {
+                        AmountDisplay()
                     }
+                }
             }
         }
     }
 }
 
-@Preview
+//@Preview
 @Composable
-fun AmountDisplay(){
+fun AmountDisplay(totalPerPerson: Double = 0.0){
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,12 +55,12 @@ fun AmountDisplay(){
             verticalArrangement = Arrangement.Center
         ) {
             Text(text = "Total Per Person", style = MaterialTheme.typography.h5)
-            Text(text = "$134",style = MaterialTheme.typography.h4, fontWeight = FontWeight.ExtraBold)
+            Text(text = "₹$totalPerPerson",style = MaterialTheme.typography.h4, fontWeight = FontWeight.ExtraBold)
         }
     }
 }
 
-@Preview
+//@Preview
 @Composable
 fun Header(){
     Surface(
@@ -75,6 +77,21 @@ fun Header(){
         ) {
             Text(text = "Tip Collector")
         }
+    }
+}
+
+@Preview
+@Composable
+fun MainContent(){
+    Surface(
+        modifier = Modifier
+            .padding(12.dp)
+            .fillMaxWidth()
+        ,
+        border= BorderStroke(1.dp,Color.LightGray) ,
+        shape = RoundedCornerShape(CornerSize(8.dp))
+    ) {
+        Text(text = "hello world")
     }
 }
 
@@ -104,6 +121,8 @@ fun DefaultPreview() {
                     .padding(20.dp)
                 ) {
                     AmountDisplay()
+                    Spacer(modifier = Modifier.height(20.dp))
+                    MainContent()
                 }
             }
         }
